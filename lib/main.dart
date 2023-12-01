@@ -74,6 +74,8 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  List<bool> isChecked = List.generate(500, (i) => i % 3 == 1);
+
   _showAlertDialog(BuildContext context, String text) {
     // set up the button
     Widget okButton = TextButton(
@@ -138,10 +140,17 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Expanded(child: ListView.builder(itemBuilder: (context, index) {
+            Expanded(child: ListView.builder(itemCount: isChecked.length, itemBuilder: (context, index) {
               return Row(
                 children: [
                   Text('row $index'),
+                  Checkbox(
+                      value: isChecked[index],
+                      onChanged: (state) {
+                        setState(() {
+                          isChecked[index] = state == true;
+                        });
+                      }),
                   TextButton(
                       onPressed: () {
                         _showAlertDialog(context, 'data $index');
