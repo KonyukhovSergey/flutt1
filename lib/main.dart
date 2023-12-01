@@ -74,6 +74,33 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  _showAlertDialog(BuildContext context, String text) {
+    // set up the button
+    Widget okButton = TextButton(
+      child: const Text('OK'),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: const Text('My title'),
+      content: Text(text),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -112,7 +139,16 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Expanded(child: ListView.builder(itemBuilder: (context, index) {
-              return Text('row $index');
+              return Row(
+                children: [
+                  Text('row $index'),
+                  TextButton(
+                      onPressed: () {
+                        _showAlertDialog(context, 'data $index');
+                      },
+                      child: const Text('нажми мя!')),
+                ],
+              );
             })),
             const Text(
               'You have pushed the button this many times:',
