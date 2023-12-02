@@ -2,6 +2,8 @@
 
 A new Flutter project.
 
+https://konyukhovsergey.github.io/flutt1/build/web/index.html
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
